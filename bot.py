@@ -1,19 +1,29 @@
 import discord
-import responses
+import responses  
+
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 async def send_message(message, user_message, is_private):
     try:
-        response = response.handle_response(user_message)
+        response = responses.handle_response(user_message)  # corrected response to responses
         await message.author.send(response) if is_private else await message.channel.send(response)
-        except Exeption as e:
-            print(e)
+    except Exception as e:  # corrected the indentation here
+        print(e)
 
-            def run_discord_bot:
-                TOKEN = "MTE0ODk5ODQ0MTEwMDM5MDUzMQ.GJ_aQh.aL-u9CWQXrxXl2QDKuAI9QjRft1jMF0ttRrzLk"
-                client = discord.Client()
+def run_discord_bot():  # added the def keyword
+    global TOKEN
+    TOKEN = os.getenv('TOKEN')
+    client = discord.Client()
+    print("Script is running!")
+    
+    @client.event
+    async def on_ready():
+        print(f'{client.user} is now running')  # changed 'not running' to 'now running'
 
-                @client.event
-                async def on_ready():
-                    print(f'{client.user} is not running')
+    client.run(TOKEN)
 
-                    client.run(TOKEN)
+
+
