@@ -8,7 +8,7 @@ async def send_message(message, user_message, is_private):
         except Exeption as e:
             print(e)
 
-            def run_discord_bot;
+            def run_discord_bot:
                 TOKEN = "MTE0ODk5ODQ0MTEwMDM5MDUzMQ.GJ_aQh.aL-u9CWQXrxXl2QDKuAI9QjRft1jMF0ttRrzLk"
                 client = discord.Client()
 
