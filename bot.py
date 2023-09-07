@@ -1,5 +1,9 @@
 import discord
 import responses  
+from discord import Intents
+intents = Intents.default()
+
+
 
 import os
 from dotenv import load_dotenv
@@ -13,15 +17,31 @@ async def send_message(message, user_message, is_private):
     except Exception as e:  # corrected the indentation here
         print(e)
 
-def run_discord_bot():  # added the def keyword
-    global TOKEN
+def run_discord_bot():  
     TOKEN = os.getenv('TOKEN')
-    client = discord.Client()
-    print("Script is running!")
+    client = discord.Client(intents=intents)
     
     @client.event
     async def on_ready():
-        print(f'{client.user} is now running')  # changed 'not running' to 'now running'
+         async def on_message(message):
+        if message.author == client.user:
+            return
+
+
+        username = str(message.author)
+        user_message = str(message.content)
+        channel = str(message.channel)
+
+        print(f"{username} said: `{user_message}` ({channel})")
+
+        if user_message[0]=='?':
+
+            user_message = user_message[1:]
+            await send_message(message, user_message, is_private=True)
+        else:
+            await send_message(message, user_message, is_private=False)
+
+    
 
     client.run(TOKEN)
 
