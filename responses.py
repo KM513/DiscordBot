@@ -8,5 +8,4 @@ def handle_response(message) -> str:
         return str(random.randint(1,6))
     elif p_message == '!help':
         return "`This is a help message you can modify to your server's needs!`"
-    else:
-        return "Sorry, I didn't understand that."
+  
